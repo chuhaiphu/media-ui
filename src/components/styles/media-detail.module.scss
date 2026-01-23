@@ -1,0 +1,22 @@
+// Paper component
+.paperRoot {
+  position: relative;
+}
+
+.imageWrapper {
+  width: 100%;
+}
+
+.urlText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+// Delete button
+.deleteButtonRoot {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+}
