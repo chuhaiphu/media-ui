@@ -9,6 +9,9 @@ export default defineConfig({
   clean: true,
   external: ['react', 'react-dom', '@mantine/core', '@mantine/dropzone', '@mantine/notifications', 'react-icons'],
   esbuildPlugins: [
-    sassPlugin()
+    sassPlugin({
+      filter: /\.module\.scss$/,
+      type: 'local-css'
+    }),
   ]
 });

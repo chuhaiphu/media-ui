@@ -7,12 +7,10 @@ import { TbUpload, TbPhoto } from "react-icons/tb";
 import { HiOutlineX } from "react-icons/hi";
 import { useState, useEffect } from "react";
 import { notifications } from "@mantine/notifications";
-import { IMedia, UploadResult, ICreateMedia } from '../types';
+import { ICreateMedia } from '../types';
 import { validateImageFile, formatFileSize, cx } from '../utils/helpers';
 import defaultClasses from './styles/media-upload.module.scss';
 import { MediaUploadProps, UploadFileItem } from './props/media-upload-props';
-
-export type { MediaUploadProps, UploadFileItem, MediaUploadClassNames } from './props/media-upload-props';
 
 export function MediaUpload({
   onUpload,
@@ -81,12 +79,6 @@ export function MediaUpload({
         const savedMedia = await onSave(mediaData);
         onUploadSuccess?.(savedMedia);
       }
-
-      notifications.show({
-        title: 'Upload successful',
-        message: `Successfully uploaded ${uploadResults.length} image(s)`,
-        color: 'green',
-      });
     } catch (error) {
       setUploadFiles((prev) =>
         prev.map((item) =>
@@ -96,11 +88,6 @@ export function MediaUpload({
         )
       );
       onUploadError?.(error as Error);
-      notifications.show({
-        title: 'Upload failed',
-        message: (error as Error).message,
-        color: 'red',
-      });
     } finally {
       setIsUploading(false);
     }

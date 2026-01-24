@@ -17,8 +17,6 @@ import { cx } from '../utils/helpers';
 import { MediaDetailProps } from './props/media-detail-props';
 import { BsSaveFill } from "react-icons/bs";
 
-export type { MediaDetailClassNames, MediaDetailProps } from './props/media-detail-props';
-
 export function MediaDetail({
   image,
   onUpdate,

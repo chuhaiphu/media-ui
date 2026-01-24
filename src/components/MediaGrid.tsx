@@ -6,8 +6,6 @@ import defaultClasses from './styles/media-grid.module.scss';
 import { MediaGridProps } from './props/media-grid-props';
 import { cx } from '../utils/helpers';
 
-export type { MediaGridProps, MediaGridClassNames } from './props/media-grid-props';
-
 export function MediaGrid({
   images,
   selectedImageId = null,
