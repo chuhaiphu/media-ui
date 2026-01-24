@@ -12,10 +12,10 @@ import {
 import { useState } from "react";
 import { MdOutlineFileCopy } from "react-icons/md";
 import { GrTrash } from "react-icons/gr";
-import { IoCheckmark } from "react-icons/io5";
 import defaultClasses from './styles/media-detail.module.scss';
 import { cx } from '../utils/helpers';
 import { MediaDetailProps } from './props/media-detail-props';
+import { BsSaveFill } from "react-icons/bs";
 
 export type { MediaDetailClassNames, MediaDetailProps } from './props/media-detail-props';
 
@@ -93,7 +93,7 @@ export function MediaDetail({
         }}
       >
         <Stack gap="md">
-          <Title 
+          <Title
             order={4}
             classNames={{
               root: cx(defaultClasses.titleRoot, classNames?.title?.root)
@@ -114,7 +114,7 @@ export function MediaDetail({
             />
           </div>
 
-          <Stack 
+          <Stack
             gap="xs"
             classNames={{
               root: cx(defaultClasses.fieldsStackRoot, classNames?.fieldsStack?.root)
@@ -122,9 +122,9 @@ export function MediaDetail({
           >
             {/* Name (readonly) */}
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
-              <Text 
-                size="sm" 
-                fw={500} 
+              <Text
+                size="sm"
+                fw={500}
                 c="dimmed"
                 classNames={{
                   root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
@@ -132,7 +132,7 @@ export function MediaDetail({
               >
                 Name
               </Text>
-              <Text 
+              <Text
                 classNames={{
                   root: cx(defaultClasses.fieldValueRoot, classNames?.fieldValue?.root)
                 }}
@@ -144,20 +144,15 @@ export function MediaDetail({
             {/* Title with inline save button */}
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
               <Group gap={4} align="center">
-                <Text 
-                  size="sm" 
-                  fw={500} 
-                  c="dimmed"
-                  classNames={{
-                    root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
-                  }}
+                <Text size="sm" fw={500} c="dimmed"
+                  classNames={{ root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root) }}
                 >
                   Title
                 </Text>
                 {isTitleDirty && (
                   <ActionIcon
                     size="xs"
-                    variant="filled"
+                    variant="transparent"
                     color="green"
                     onClick={handleSaveTitle}
                     loading={isSavingTitle}
@@ -166,7 +161,7 @@ export function MediaDetail({
                       root: cx(defaultClasses.saveButtonRoot, classNames?.saveButton?.root)
                     }}
                   >
-                    <IoCheckmark size={12} />
+                    <BsSaveFill size={12} />
                   </ActionIcon>
                 )}
               </Group>
@@ -174,6 +169,12 @@ export function MediaDetail({
                 value={title}
                 placeholder="Enter title"
                 onChange={(e) => setTitle(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (isTitleDirty) handleSaveTitle();
+                  }
+                }}
                 minRows={2}
                 autosize
                 classNames={{
@@ -187,20 +188,15 @@ export function MediaDetail({
             {/* Description with inline save button */}
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
               <Group gap={4} align="center">
-                <Text 
-                  size="sm" 
-                  fw={500} 
-                  c="dimmed"
-                  classNames={{
-                    root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
-                  }}
+                <Text size="sm" fw={500} c="dimmed"
+                  classNames={{ root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root) }}
                 >
                   Description
                 </Text>
                 {isDescriptionDirty && (
                   <ActionIcon
                     size="xs"
-                    variant="filled"
+                    variant="transparent"
                     color="green"
                     onClick={handleSaveDescription}
                     loading={isSavingDescription}
@@ -209,7 +205,7 @@ export function MediaDetail({
                       root: cx(defaultClasses.saveButtonRoot, classNames?.saveButton?.root)
                     }}
                   >
-                    <IoCheckmark size={12} />
+                    <BsSaveFill size={12} />
                   </ActionIcon>
                 )}
               </Group>
@@ -217,6 +213,12 @@ export function MediaDetail({
                 value={description}
                 placeholder="Enter description"
                 onChange={(e) => setDescription(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (isDescriptionDirty) handleSaveDescription();
+                  }
+                }}
                 minRows={3}
                 autosize
                 classNames={{
@@ -229,9 +231,9 @@ export function MediaDetail({
 
             {/* Type (readonly) */}
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
-              <Text 
-                size="sm" 
-                fw={500} 
+              <Text
+                size="sm"
+                fw={500}
                 c="dimmed"
                 classNames={{
                   root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
@@ -239,7 +241,7 @@ export function MediaDetail({
               >
                 Type
               </Text>
-              <Text 
+              <Text
                 classNames={{
                   root: cx(defaultClasses.fieldValueRoot, classNames?.fieldValue?.root)
                 }}
@@ -250,9 +252,9 @@ export function MediaDetail({
 
             {/* URL with copy button */}
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
-              <Text 
-                size="sm" 
-                fw={500} 
+              <Text
+                size="sm"
+                fw={500}
                 c="dimmed"
                 classNames={{
                   root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
@@ -286,9 +288,9 @@ export function MediaDetail({
 
             {/* Timestamps */}
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
-              <Text 
-                size="sm" 
-                fw={500} 
+              <Text
+                size="sm"
+                fw={500}
                 c="dimmed"
                 classNames={{
                   root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
@@ -296,7 +298,7 @@ export function MediaDetail({
               >
                 Created At
               </Text>
-              <Text 
+              <Text
                 size="sm"
                 classNames={{
                   root: cx(defaultClasses.fieldValueRoot, classNames?.fieldValue?.root)
@@ -306,9 +308,9 @@ export function MediaDetail({
               </Text>
             </div>
             <div className={cx(defaultClasses.fieldGroup, classNames?.fieldGroup)}>
-              <Text 
-                size="sm" 
-                fw={500} 
+              <Text
+                size="sm"
+                fw={500}
                 c="dimmed"
                 classNames={{
                   root: cx(defaultClasses.fieldLabelRoot, classNames?.fieldLabel?.root)
@@ -316,7 +318,7 @@ export function MediaDetail({
               >
                 Updated At
               </Text>
-              <Text 
+              <Text
                 size="sm"
                 classNames={{
                   root: cx(defaultClasses.fieldValueRoot, classNames?.fieldValue?.root)

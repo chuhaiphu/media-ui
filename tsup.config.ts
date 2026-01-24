@@ -1,5 +1,5 @@
 import { defineConfig } from 'tsup';
-
+import { sassPlugin } from 'esbuild-sass-plugin';
 export default defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
@@ -8,4 +8,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   external: ['react', 'react-dom', '@mantine/core', '@mantine/dropzone', '@mantine/notifications', 'react-icons'],
+  esbuildPlugins: [
+    sassPlugin()
+  ]
 });

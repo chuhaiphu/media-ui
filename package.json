@@ -1,6 +1,6 @@
 {
   "name": "@vinaup/media-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A comprehensive React UI component kit for media management, built with Mantine.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -16,7 +16,7 @@
   },
   "keywords": [
     "media",
-    "manager",
+    "ui",
     "vinaup"
   ],
   "author": "Vinaup",
@@ -37,6 +37,7 @@
     "@types/node": "^25.0.10",
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
+    "esbuild-sass-plugin": "^3.6.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
