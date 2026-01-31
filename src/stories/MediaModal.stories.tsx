@@ -5,7 +5,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IMedia } from '../types';
 
 // Mock data
-const mockImages: IMedia[] = Array.from({ length: 12 }).map((_, index) => ({
+const mockImages: IMedia[] = Array.from({ length: 100 }).map((_, index) => ({
   id: `img-${index}`,
   name: `Image ${index + 1}.jpg`,
   title: `Beautiful Landscape ${index + 1}`,
@@ -29,7 +29,6 @@ const meta: Meta<typeof MediaModal> = {
 export default meta;
 type Story = StoryObj<typeof MediaModal>;
 
-// Wrapper component để quản lý state đóng/mở modal
 const ModalWrapper = (args: any) => {
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -46,7 +45,6 @@ const ModalWrapper = (args: any) => {
           close();
         }}
         onUpload={async (files) => {
-          // Mock upload delay
           await new Promise((resolve) => setTimeout(resolve, 2000));
           return files.map((file) => ({
             url: URL.createObjectURL(file),

@@ -52,5 +52,6 @@ export interface MediaGridProps {
   selectedImageId?: string | null;
   onImageClick: (imageId: string) => void;
   sortOptions?: { value: string; label: string }[];
+  itemsPerPage?: number;
   classNames?: MediaGridClassNames;
 }

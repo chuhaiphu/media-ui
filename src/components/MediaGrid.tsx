@@ -1,6 +1,6 @@
 'use client';
-import { Grid, GridCol, Group, Image, Paper, Stack, Text, TextInput, Select } from "@mantine/core";
-import { useState } from "react";
+import { Grid, GridCol, Group, Image, Paper, Stack, Text, TextInput, Select, Pagination } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import defaultClasses from './styles/media-grid.module.scss';
 import { MediaGridProps } from './props/media-grid-props';
@@ -9,6 +9,7 @@ import { cx } from '../utils/helpers';
 export function MediaGrid({
   images,
   selectedImageId = null,
+  itemsPerPage = 12,
   onImageClick,
   sortOptions = [
     { value: 'createdAt', label: 'By created date' },
@@ -19,6 +20,7 @@ export function MediaGrid({
 }: MediaGridProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<string | null>('createdAt');
+  const [activePage, setActivePage] = useState(1);
 
   const filteredAndSortedImages = () => {
     let result = [...images];
@@ -44,16 +46,24 @@ export function MediaGrid({
     }
     return result;
   };
+  const processedImages = filteredAndSortedImages();
+  const totalPages = Math.ceil(processedImages.length / itemsPerPage);
+  const paginatedImages = processedImages.slice(itemsPerPage * (activePage - 1), itemsPerPage * activePage);
+
+  // Reset active page when sortBy or searchQuery change
+  useEffect(() => {
+    setActivePage(1);
+  }, [sortBy, searchQuery]);
 
   return (
-    <Stack 
+    <Stack
       gap="md"
       classNames={{
         root: classNames?.rootStack?.root
       }}
     >
-      <Group 
-        justify="space-between" 
+      <Group
+        justify="space-between"
         align="center"
         classNames={{
           root: classNames?.filterGroup?.root
@@ -78,11 +88,11 @@ export function MediaGrid({
         />
       </Group>
 
-      <Grid 
+      <Grid
         gutter="md"
         classNames={classNames?.grid}
       >
-        {filteredAndSortedImages().map((image) => {
+        {paginatedImages.map((image) => {
           const isSelected = selectedImageId === image.id;
           return (
             <GridCol key={image.id} span={{ base: 6, sm: 4, md: 3, lg: 2 }}>
@@ -100,7 +110,7 @@ export function MediaGrid({
                   )
                 }}
               >
-                <Stack 
+                <Stack
                   gap={6}
                   classNames={{
                     root: classNames?.itemStack?.root
@@ -116,9 +126,9 @@ export function MediaGrid({
                       }}
                     />
                   </div>
-                  <Text 
-                    size="xs" 
-                    c="dimmed" 
+                  <Text
+                    size="xs"
+                    c="dimmed"
                     lineClamp={1}
                     title={image.title ?? image.name}
                     classNames={{
@@ -133,6 +143,11 @@ export function MediaGrid({
           );
         })}
       </Grid>
+      <Pagination
+        value={activePage}
+        onChange={setActivePage}
+        total={totalPages}
+      />
     </Stack>
   );
 }

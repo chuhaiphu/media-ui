@@ -18,7 +18,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const mockImages: IMedia[] = Array.from({ length: 10 }).map((_, i) => ({
+const mockImages: IMedia[] = Array.from({ length: 100 }).map((_, i) => ({
   id: `${i}`,
   name: `image-${i}.jpg`,
   title: i % 3 === 0 ? `Image Title ${i}` : null,
@@ -26,8 +26,8 @@ const mockImages: IMedia[] = Array.from({ length: 10 }).map((_, i) => ({
   url: `https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-${(i % 10) + 1}.png`,
   type: 'image/jpeg',
   folder: 'gallery',
-  createdAt: new Date(2024, 0, i + 1),
-  updatedAt: new Date(2024, 0, i + 1),
+  createdAt: new Date(2024, 0, (i % 30) + 1),
+  updatedAt: new Date(2024, 0, (i % 30) + 1),
 }));
 
 export const Default: Story = {
