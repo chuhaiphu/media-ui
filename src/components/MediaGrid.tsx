@@ -9,7 +9,7 @@ import { cx } from '../utils/helpers';
 export function MediaGrid({
   images,
   selectedImageId = null,
-  itemsPerPage = 12,
+  itemsPerPage = 24,
   onImageClick,
   sortOptions = [
     { value: 'createdAt', label: 'By created date' },
@@ -113,7 +113,7 @@ export function MediaGrid({
                 <Stack
                   gap={6}
                   classNames={{
-                    root: classNames?.itemStack?.root
+                    root: cx(defaultClasses.imageStackRoot, classNames?.itemStack?.root)
                   }}
                 >
                   <div className={cx(defaultClasses.imageContainer, classNames?.imageContainer)}>

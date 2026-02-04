@@ -1,6 +1,6 @@
 'use client';
 
-import { Modal, Tabs, Button, Stack, Text } from '@mantine/core';
+import { Modal, Tabs, Button, Stack, Text, Flex } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { MediaGrid } from './MediaGrid';
 import { MediaUpload } from './MediaUpload';
@@ -63,8 +63,12 @@ export function MediaModal({
       opened={opened}
       onClose={onClose}
       title={title}
-      size="xl"
-      classNames={classNames?.modal}
+      size={'60vw'}
+      styles={{
+        body: {
+          paddingBottom: 0
+        }
+      }}
     >
       <Tabs
         value={activeTab}
@@ -105,7 +109,7 @@ export function MediaModal({
         </Tabs.Panel>
       </Tabs>
 
-      <div className={cx(defaultClasses.footer, classNames?.footer?.root)}>
+      <Flex className={cx(defaultClasses.footer, classNames?.footer?.root)} justify="flex-end" gap="sm">
         <Button variant="default" onClick={onClose}>
           {cancelLabel}
         </Button>
@@ -115,7 +119,7 @@ export function MediaModal({
         >
           {submitLabel}
         </Button>
-      </div>
+      </Flex>
     </Modal>
   );
 }

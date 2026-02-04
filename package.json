@@ -1,6 +1,6 @@
 {
   "name": "@vinaup/media-ui",
-  "version": "0.0.1",
+  "version": "0.0.8",
   "description": "A comprehensive React UI component kit for media module for CMS Admin, built with Mantine.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

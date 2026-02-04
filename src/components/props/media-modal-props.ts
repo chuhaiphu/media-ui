@@ -1,12 +1,6 @@
 import { IMedia, MediaUploadHandlers } from '../../types';
 
 export interface MediaModalClassNames {
-  modal?: {
-    root?: string;
-    header?: string;
-    body?: string;
-    content?: string;
-  };
   tabs?: {
     root?: string;
     list?: string;
